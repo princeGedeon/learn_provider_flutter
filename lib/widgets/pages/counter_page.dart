@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:learn_provider/models/count_type.dart';
 import 'package:learn_provider/providers/count_provider.dart';
+import 'package:learn_provider/widgets/simple_widgets/count_button.dart';
 import 'package:provider/provider.dart';
+
+import '../simple_widgets/counter_text.dart';
 
 class CounterPage extends StatelessWidget {
   const CounterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
-      // Center is a layout widget. It takes a single child and positions it
-      // in the middle of the parent.
-      child: Column(
+    return  Column(
 
-        mainAxisAlignment: MainAxisAlignment.center,
+
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           const Text(
             'Le numéro choisi est',
           ),
-          Text(
-            '${context.watch<CountProvider>().count}',
-            style: Theme.of(context).textTheme.headline4,
-          ),
+          CounterText(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FloatingActionButton(onPressed: (()=> context.read<CountProvider>().incrementCounter()),
-                child:  Icon(Icons.add),
-                heroTag: 0,
-
-              )
+              CountButton(type: CountType.decrement),
+              CountButton(type: CountType.increment),
+              CountButton(type: CountType.reset)
             ],
           )
         ],
-      ),
-    );
+      );
   }
 }
